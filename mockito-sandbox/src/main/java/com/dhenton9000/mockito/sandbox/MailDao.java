@@ -11,8 +11,7 @@ import java.util.List;
  * @author dhenton
  */
 public interface MailDao {
-    List<String> getMailHeaders();
-    List<Integer> getMailIds();
-    String getMailBodyForId(Integer id);
+    List<MailMessage> getAllMailMessages();
+    MailMessage getMessageForId(Integer id);
     boolean hasAccount(User  principal);
 }

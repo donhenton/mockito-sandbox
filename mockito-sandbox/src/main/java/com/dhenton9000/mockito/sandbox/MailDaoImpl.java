@@ -12,20 +12,18 @@ import java.util.List;
  */
 public class MailDaoImpl implements MailDao {
 
-    public List<String> getMailHeaders() {
+    public List<MailMessage> getAllMailMessages() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public List<Integer> getMailIds() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public String getMailBodyForId(Integer id) {
+    public MailMessage getMessageForId(Integer id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public boolean hasAccount(User principal) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    
     
 }

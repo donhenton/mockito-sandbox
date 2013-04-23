@@ -13,10 +13,7 @@
 
     <reporting>
         <plugins>
-                   
-               
-                   
-                   
+                    
             <plugin>
                 <!-- http://maven.apache.org/plugins/maven-surefire-report-plugin/ -->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -27,9 +24,7 @@
                     <!-- surefire uses a new jvm, MAVEN_OPTS are ignored, so you better set the memory options here -->
                     <argLine>-Xmx512m -XX:MaxPermSize=256m</argLine>
                 </configuration>
-                               
-                               
-                               
+                              
             </plugin>
             <plugin>
                 <!-- http://maven.apache.org/plugins/maven-javadoc-plugin/ -->

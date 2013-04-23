@@ -4,7 +4,6 @@
  */
 package com.dhenton9000.mockito.sandbox;
 
-import com.sun.security.auth.UserPrincipal;
 import java.util.List;
 import javax.security.auth.login.LoginException;
 

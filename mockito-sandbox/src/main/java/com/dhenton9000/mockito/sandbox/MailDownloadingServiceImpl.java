@@ -17,7 +17,7 @@ public class MailDownloadingServiceImpl implements MailDownloadingService {
     private MailDao mailDao = null;
 
     public List<String> getMailSubjects(String filter) {
-        List<MailMessage> unfilteredHeaders = mailDao.getAllMailMessages();
+        List<MailMessage> unfilteredHeaders = getMailDao().getAllMailMessages();
         ArrayList<String> filteredSubjects = new ArrayList<String>();
         for (MailMessage t : unfilteredHeaders) {
 
@@ -34,7 +34,7 @@ public class MailDownloadingServiceImpl implements MailDownloadingService {
     }
 
     public List<Integer> getMailIds(String filter) {
-        List<MailMessage> unfilteredHeaders = mailDao.getAllMailMessages();
+        List<MailMessage> unfilteredHeaders = getMailDao().getAllMailMessages();
         ArrayList<Integer> filteredIds = new ArrayList<Integer>();
         for (MailMessage t : unfilteredHeaders) {
 
@@ -52,7 +52,7 @@ public class MailDownloadingServiceImpl implements MailDownloadingService {
 
     public String getMailBodyForId(Integer id, String filter) {
         String t = null;
-        MailMessage m = mailDao.getMessageForId(id);
+        MailMessage m = getMailDao().getMessageForId(id);
         if (m == null) {
             return null;
         }

@@ -68,12 +68,13 @@ public class MailDownloadingServiceImpl implements MailDownloadingService {
     }
 
     public User authenticate(User u) throws LoginException {
-        User uPerson = null;
-        if (mailDao.hasAccount(u))
+        
+        if (getMailDao().hasAccount(u))
         {
+            u.setOkay(true);
             return u;
         }        
-        return uPerson;
+        throw new LoginException();
     }
 
     /**

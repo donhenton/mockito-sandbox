@@ -14,4 +14,5 @@ public interface MailDao {
     List<MailMessage> getAllMailMessages();
     MailMessage getMessageForId(Integer id);
     boolean hasAccount(User  principal);
+    void performAudit(AuditModel model);
 }

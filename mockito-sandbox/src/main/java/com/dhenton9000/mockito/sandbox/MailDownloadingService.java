@@ -17,4 +17,5 @@ public interface MailDownloadingService {
     List<Integer> getMailIds(String filter);
     String getMailBodyForId(Integer id,String filter);
     User authenticate(User u) throws LoginException;
+    List<String> getMailSubjectsWithAudit(String filter);
 }

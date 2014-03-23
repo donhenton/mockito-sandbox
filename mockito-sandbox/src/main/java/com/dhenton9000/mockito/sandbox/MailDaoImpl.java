@@ -24,6 +24,11 @@ public class MailDaoImpl implements MailDao {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public void performAudit(AuditModel model) {
+        throw new UnsupportedOperationException("Not supported yet.");  
+    }
+
     
     
 }

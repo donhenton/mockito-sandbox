@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import static org.mockito.BDDMockito.*;
 
@@ -49,7 +50,7 @@ public class AppTest {
         user1 = new User();
         user1.setName(NAME);
         user1.setPassword(PASSWORD);
- 
+
     }
 
     /**
@@ -66,7 +67,6 @@ public class AppTest {
         String body = service.getMailBodyForId(i, null);
         assertEquals(BODY_STRING, body);
 
-
     }
 
     @Test
@@ -79,7 +79,6 @@ public class AppTest {
         assertEquals(BODY_STRING, body);
         body = service.getMailBodyForId(6, null);
         assertNull(body);
-
 
     }
 
@@ -111,9 +110,8 @@ public class AppTest {
     public void testMailSubjectsWithOutFilter() {
 
         given(dao.getAllMailMessages()).willReturn(unfilteredHeaders);
-        List<String> things = service.getMailSubjects(null);
+        List<String> things = service.getMailSubjects((String) null);
         assertEquals(unfilteredHeaders.size(), things.size());
-
 
     }
 
@@ -124,6 +122,17 @@ public class AppTest {
         List<String> things = service.getMailSubjects(GARBAGE);
         assertEquals(unfilteredHeaders.size() - 1, things.size());
 
+    }
+
+    @Test
+    public void testMailAudit() {
+
+        given(dao.getAllMailMessages()).willReturn(unfilteredHeaders);
+        ArgumentCaptor<AuditModel> captor = ArgumentCaptor.forClass(AuditModel.class);
+        List<String> things = service.getMailSubjectsWithAudit(GARBAGE);
+        verify(dao).performAudit(captor.capture());
+        assertEquals(unfilteredHeaders.size() - 1, things.size());
+        assertEquals(GARBAGE, captor.getValue().getFilter());
 
     }
 
@@ -134,7 +143,6 @@ public class AppTest {
         List<Integer> things = service.getMailIds(GARBAGE);
         assertEquals(unfilteredHeaders.size() - 1, things.size());
 
-
     }
 
     @Test
@@ -143,7 +151,6 @@ public class AppTest {
         given(dao.getAllMailMessages()).willReturn(unfilteredHeaders);
         List<Integer> things = service.getMailIds(null);
         assertEquals(unfilteredHeaders.size(), things.size());
-
 
     }
 
@@ -154,7 +161,7 @@ public class AppTest {
         User u = service.authenticate(user1);
     }
 
-    @Test 
+    @Test
     public void testUserAccount() throws Exception {
 
         assertFalse(user1.isOkay());

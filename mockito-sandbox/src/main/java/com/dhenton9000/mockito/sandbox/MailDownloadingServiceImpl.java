@@ -15,6 +15,7 @@ import javax.security.auth.login.LoginException;
 public class MailDownloadingServiceImpl implements MailDownloadingService {
 
     private MailDao mailDao = null;
+   
 
     public List<String> getMailSubjects(String filter) {
         List<MailMessage> unfilteredHeaders = getMailDao().getAllMailMessages();
@@ -89,5 +90,13 @@ public class MailDownloadingServiceImpl implements MailDownloadingService {
      */
     public void setMailDao(MailDao mailDao) {
         this.mailDao = mailDao;
+    }
+
+    @Override
+    public List<String> getMailSubjectsWithAudit(String filter) {
+        AuditModel model = new AuditModel();
+        model.setFilter(filter);
+      mailDao.performAudit(model);
+      return   getMailSubjects(filter);
     }
 }
